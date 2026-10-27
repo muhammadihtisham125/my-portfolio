@@ -210,24 +210,53 @@
 <section id="contact">
     <h2 class="section-title">Contact Me</h2>
     <div class="contact-container">
-        <!-- Direct Email Form via FormSubmit -->
+        <!-- Dual Action Form: Email + WhatsApp dono ek saath -->
         <form action="https://formsubmit.co/muhammadihtisham125@gmail.com" method="POST" class="contact-form">
             
-            <!-- Hidden Settings -->
-            <input type="hidden" name="_subject" value="New Portfolio Message from Visitor!">
+            <input type="hidden" name="_subject" value="New Portfolio Message!">
             <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
 
-            <!-- Form Inputs -->
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <input type="tel" name="phone" placeholder="Your Mobile Number" required>
-            <textarea name="message" placeholder="Your Message" required></textarea>
+            <input type="text" id="wa_name" name="name" placeholder="Your Name" required>
+            <input type="email" id="wa_email" name="email" placeholder="Your Email" required>
+            <input type="tel" id="wa_phone" name="phone" placeholder="Your Mobile Number" required>
+            <textarea id="wa_message" name="message" placeholder="Your Message" required></textarea>
 
-            <button type="submit">Send Message</button>
+            <!-- Dono Buttons saath mein -->
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px;">
+                <!-- Email Button -->
+                <button type="submit" style="flex: 1;">
+                    <i class="fa-solid fa-envelope"></i> Send via Email
+                </button>
+                
+                <!-- WhatsApp Button -->
+                <button type="button" onclick="sendToWhatsApp()" style="flex: 1; background: rgba(37, 211, 102, 0.15); color: #25D366; border: 1px solid rgba(37, 211, 102, 0.6); text-shadow: 0 0 10px rgba(37, 211, 102, 0.4);">
+                    <i class="fa-brands fa-whatsapp"></i> Send via WhatsApp
+                </button>
+            </div>
         </form>
     </div>
 </section>
+
+<!-- WhatsApp Trigger Script -->
+<script>
+function sendToWhatsApp() {
+    let name = document.getElementById('wa_name').value;
+    let email = document.getElementById('wa_email').value;
+    let phone = document.getElementById('wa_phone').value;
+    let message = document.getElementById('wa_message').value;
+
+    if (!name || !message) {
+        alert("Pehle apna Name aur Message fill karein!");
+        return;
+    }
+
+    let whatsappNumber = "923365768298";
+    let formattedText = `*New Portfolio Inquiry*%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Email:* ${encodeURIComponent(email)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Message:* ${encodeURIComponent(message)}`;
+    
+    let whatsappURL = `https://wa.me/${whatsappNumber}?text=${formattedText}`;
+    window.open(whatsappURL, '_blank');
+}
+</script>
 <footer>
     <div class="footer-content">
         <h2>Muhammad Ihtisham</h2>
