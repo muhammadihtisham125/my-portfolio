@@ -210,11 +210,20 @@
 <section id="contact">
     <h2 class="section-title">Contact Me</h2>
     <div class="contact-container">
-        <form class="contact-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <input type="tel" placeholder="Your Mobile Number" required>
-            <textarea placeholder="Your Message" required></textarea>
+        <!-- Direct Email Form via FormSubmit -->
+        <form action="https://formsubmit.co/muhammadihtisham125@gmail.com" method="POST" class="contact-form">
+            
+            <!-- Hidden Settings -->
+            <input type="hidden" name="_subject" value="New Portfolio Message from Visitor!">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+
+            <!-- Form Inputs -->
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="tel" name="phone" placeholder="Your Mobile Number" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+
             <button type="submit">Send Message</button>
         </form>
     </div>
