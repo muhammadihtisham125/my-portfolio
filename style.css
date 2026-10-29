@@ -784,3 +784,159 @@ footer {
     z-index: 0; /* Content ke piche chalega */
     pointer-events: none; /* Mouse clicks buttons tak pounchne dega */
 }
+/* Skills Building Outer Wrapper */
+.skills-building {
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(15, 23, 42, 0.8);
+    border: 2px solid #3ea6ff;
+    border-radius: 15px 15px 5px 5px;
+    box-shadow: 0 0 25px rgba(62, 166, 255, 0.3);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.8s ease-in-out;
+}
+
+/* Roof Design */
+.building-roof {
+    background: linear-gradient(90deg, #d4af37, #3ea6ff);
+    padding: 12px;
+    color: #000;
+    font-weight: bold;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.roof-light {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background: #3ea6ff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #3ea6ff, 0 0 20px #3ea6ff;
+}
+
+/* Door Frame & Double Doors */
+.building-door-frame {
+    height: 220px;
+    position: relative;
+    cursor: pointer;
+    background: #030305;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.door {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    transition: transform 0.8s ease-in-out;
+    z-index: 2;
+}
+
+.door-left {
+    left: 0;
+    border-right: 2px solid #d4af37;
+}
+
+.door-right {
+    right: 0;
+    border-left: 2px solid #d4af37;
+}
+
+/* Door Text & Icon */
+.door-text {
+    z-index: 3;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(62, 166, 255, 0.8);
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.door-text i {
+    font-size: 32px;
+    color: #d4af37;
+    margin-bottom: 8px;
+    animation: lockPulse 2s infinite;
+}
+
+.door-text p {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin: 5px 0;
+}
+
+.door-sub {
+    font-size: 13px;
+    color: #3ea6ff;
+}
+
+@keyframes lockPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.15); opacity: 0.7; }
+}
+
+/* Open Doors Animation Classes */
+.skills-building.open .door-left {
+    transform: translateX(-100%);
+}
+
+.skills-building.open .door-right {
+    transform: translateX(100%);
+}
+
+.skills-building.open .door-text {
+    opacity: 0;
+}
+
+.skills-building.dissolve {
+    opacity: 0;
+    transform: scale(0.9);
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    pointer-events: none;
+}
+
+/* Skills Content Visibility Transitions */
+.skills-content-hidden {
+    display: none !important;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease;
+}
+
+.skills-content-visible {
+    display: flex !important;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Re-lock Button Styling */
+.relock-btn {
+    padding: 8px 18px;
+    font-size: 13px;
+    color: #d4af37;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid #d4af37;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.relock-btn:hover {
+    background: #d4af37;
+    color: #000;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+}

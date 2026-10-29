@@ -89,7 +89,26 @@
 </section>
 <section id="skills">
     <h2 class="section-title">Technical Skills</h2>
-    <div class="skills-container">
+
+    <!-- Building / Skills Vault Cover -->
+    <div id="skills-building" class="skills-building">
+        <div class="building-roof">
+            <span class="roof-light"></span>
+            <h3>SKILLS HQ</h3>
+        </div>
+        <div class="building-door-frame" onclick="openSkillsBuilding()">
+            <div class="door door-left"></div>
+            <div class="door door-right"></div>
+            <div class="door-text">
+                <i class="fa-solid fa-lock"></i>
+                <p>TECHNICAL SKILLS</p>
+                <span class="door-sub">Click Main Door to Open</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actual Skills Grid (Door khulne par reveal hoga) -->
+    <div class="skills-container skills-content-hidden" id="skills-content">
         <div class="skill-box">
             <i class="fa-brands fa-python"></i>
             <p>Python</p>
@@ -110,10 +129,17 @@
             <i class="fa-solid fa-gears"></i>
             <p>n8n Automation</p>
         </div>
-      <div class="skill-box">
-        <i class="fa-solid fa-brain"></i>
-        <p>LangChain & RAG</p>
+        <div class="skill-box">
+            <i class="fa-solid fa-brain"></i>
+            <p>LangChain & RAG</p>
+        </div>
     </div>
+
+    <!-- Re-lock Building Button -->
+    <div id="relock-container" style="display: none; text-align: center; margin-top: 25px;">
+        <button onclick="closeSkillsBuilding()" class="relock-btn">
+            <i class="fa-solid fa-door-closed"></i> Lock Skills HQ
+        </button>
     </div>
 </section>
 <section id="projects">
@@ -454,6 +480,40 @@ function animateParticles() {
 
 initParticles();
 animateParticles();
+</script>
+<script>
+function openSkillsBuilding() {
+    const building = document.getElementById("skills-building");
+    const content = document.getElementById("skills-content");
+    const relockBtn = document.getElementById("relock-container");
+
+    // 1. Doors Open Animation
+    building.classList.add("open");
+
+    // 2. Dissolve Building & Show Skills after 700ms
+    setTimeout(() => {
+        building.classList.add("dissolve");
+        content.classList.remove("skills-content-hidden");
+        content.classList.add("skills-content-visible");
+        relockBtn.style.display = "block";
+    }, 700);
+}
+
+function closeSkillsBuilding() {
+    const building = document.getElementById("skills-building");
+    const content = document.getElementById("skills-content");
+    const relockBtn = document.getElementById("relock-container");
+
+    // Hide Skills & Reset Building
+    content.classList.remove("skills-content-visible");
+    content.classList.add("skills-content-hidden");
+    relockBtn.style.display = "none";
+
+    building.classList.remove("dissolve");
+    setTimeout(() => {
+        building.classList.remove("open");
+    }, 200);
+}
 </script>
 </body>
 </html>
