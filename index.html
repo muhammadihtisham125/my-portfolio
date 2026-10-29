@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
+    <!-- Light ON/OFF Overlay -->
+<div id="light-overlay">
+    <div class="overlay-content">
+        <h2 id="typing-text"></h2>
+        <button id="light-on-btn" onclick="turnOnLight()">
+            💡 Turn On Light
+        </button>
+    </div>
+</div>
 <header>
     <h1>Ihtisham.</h1>
     <nav>
@@ -282,6 +291,47 @@ function sendToWhatsApp() {
             © 2026 Muhammad Ihtisham. All Rights Reserved.
         </p>
     </div>
+    <div class="light-off-container">
+    <p>Jaty waqt light off karein 😊</p>
+    <button id="light-off-btn" onclick="turnOffLight()">
+        🌙 Turn Off Light
+    </button>
+</div>
 </footer>
+<script>
+const textToType = "Light on karo...";
+let index = 0;
+
+function typeText() {
+    const typingElement = document.getElementById("typing-text");
+    if (index < textToType.length) {
+        typingElement.innerHTML += textToType.charAt(index);
+        index++;
+        setTimeout(typeText, 100); // Typing speed
+    }
+}
+
+function turnOnLight() {
+    const overlay = document.getElementById("light-overlay");
+    overlay.classList.add("overlay-hidden");
+}
+
+function turnOffLight() {
+    const overlay = document.getElementById("light-overlay");
+    const typingElement = document.getElementById("typing-text");
+    
+    // Reset typing text
+    typingElement.innerHTML = "";
+    index = 0;
+    
+    overlay.classList.remove("overlay-hidden");
+    typeText();
+}
+
+// Start typing on page load
+window.onload = function() {
+    typeText();
+};
+</script>
 </body>
 </html>
