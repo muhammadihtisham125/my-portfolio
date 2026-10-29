@@ -144,7 +144,28 @@
 </section>
 <section id="projects">
     <h2 class="section-title">Projects</h2>
-    <div class="projects-container">
+
+    <!-- Project Lab Hologram Terminal Cover -->
+    <div id="project-lab-cover" class="project-lab-card">
+        <div class="lab-header">
+            <span class="lab-status-dot"></span>
+            <h3>PROJECT LAB // v2.0</h3>
+        </div>
+        <div class="lab-body" onclick="openProjectLab()">
+            <div class="lab-scanner-line"></div>
+            <div class="lab-content">
+                <i class="fa-solid fa-flask-vial lab-icon"></i>
+                <p class="lab-title">PROJECT LAB</p>
+                <span class="lab-sub">AI Experiments, Agentic Workflows & Repositories</span>
+                <button class="lab-start-btn">
+                    <i class="fa-solid fa-power-off"></i> Enter Project Lab
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Grid (Cover khulne par reveal hoga) -->
+    <div class="projects-container lab-content-hidden" id="projects-content">
         
         <!-- AI Exam Proctoring System -->
         <div class="project" onclick="window.open('https://github.com/muhammadihtisham125/ai-proctored-exam', '_blank')" style="cursor: pointer;" title="Click to view on GitHub">
@@ -182,7 +203,7 @@
             </p>
         </div>
 
-        <!-- WeatherAI Web App (Moved to end, No GitHub link) -->
+        <!-- WeatherAI Web App -->
         <div class="project">
             <h3>WeatherAI Web App</h3>
             <img src="assets/images/project1.jpg.jpeg" alt="WeatherAI">
@@ -191,7 +212,7 @@
             </p>
         </div>
 
-        <!-- Gmail Automation via n8n (Moved to end, No GitHub link) -->
+        <!-- Gmail Automation via n8n -->
         <div class="project">
             <h3>Gmail Automation via n8n</h3>
             <img src="assets/images/project2.jpg.png" alt="n8n Automation">
@@ -200,6 +221,13 @@
             </p>
         </div>
 
+    </div>
+
+    <!-- Lock/Close Lab Button -->
+    <div id="close-lab-container" style="display: none; text-align: center; margin-top: 25px;">
+        <button onclick="closeProjectLab()" class="close-lab-btn">
+            <i class="fa-solid fa-lock"></i> Lock Project Lab
+        </button>
     </div>
 </section>
 <section id="education">
@@ -512,6 +540,37 @@ function closeSkillsBuilding() {
     building.classList.remove("dissolve");
     setTimeout(() => {
         building.classList.remove("open");
+    }, 200);
+}
+</script>
+<script>
+function openProjectLab() {
+    const cover = document.getElementById("project-lab-cover");
+    const content = document.getElementById("projects-content");
+    const closeBtn = document.getElementById("close-lab-container");
+
+    cover.classList.add("launching");
+
+    setTimeout(() => {
+        cover.classList.add("dissolve-lab");
+        content.classList.remove("lab-content-hidden");
+        content.classList.add("lab-content-visible");
+        closeBtn.style.display = "block";
+    }, 600);
+}
+
+function closeProjectLab() {
+    const cover = document.getElementById("project-lab-cover");
+    const content = document.getElementById("projects-content");
+    const closeBtn = document.getElementById("close-lab-container");
+
+    content.classList.remove("lab-content-visible");
+    content.classList.add("lab-content-hidden");
+    closeBtn.style.display = "none";
+
+    cover.classList.remove("dissolve-lab");
+    setTimeout(() => {
+        cover.classList.remove("launching");
     }, 200);
 }
 </script>

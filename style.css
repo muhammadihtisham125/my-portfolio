@@ -940,3 +940,169 @@ footer {
     color: #000;
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
 }
+/* Project Lab Card Wrapper */
+.project-lab-card {
+    max-width: 550px;
+    margin: 0 auto;
+    background: rgba(10, 15, 28, 0.85);
+    border: 2px solid #d4af37;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.25);
+    overflow: hidden;
+    position: relative;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lab-header {
+    background: rgba(212, 175, 55, 0.1);
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.lab-status-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #25d366;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #25d366;
+    animation: pulseDot 1.5s infinite;
+}
+
+@keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.lab-header h3 {
+    color: #d4af37;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-family: monospace;
+}
+
+/* Lab Body & Scanner Beam */
+.lab-body {
+    padding: 35px 20px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    background: radial-gradient(circle, rgba(62, 166, 255, 0.05) 0%, rgba(3, 3, 5, 0.9) 100%);
+}
+
+.lab-scanner-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #3ea6ff, #d4af37, transparent);
+    box-shadow: 0 0 15px #3ea6ff;
+    animation: scanBeam 3s ease-in-out infinite;
+}
+
+@keyframes scanBeam {
+    0% { top: 0%; opacity: 0.3; }
+    50% { top: 95%; opacity: 1; }
+    100% { top: 0%; opacity: 0.3; }
+}
+
+.lab-icon {
+    font-size: 45px;
+    color: #3ea6ff;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 10px rgba(62, 166, 255, 0.6));
+    animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.lab-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.lab-sub {
+    display: block;
+    font-size: 13px;
+    color: #a0aab8;
+    margin-bottom: 20px;
+}
+
+.lab-start-btn {
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    background: #d4af37;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+    transition: all 0.3s ease;
+}
+
+.lab-body:hover .lab-start-btn {
+    background: #3ea6ff;
+    color: #fff;
+    box-shadow: 0 0 25px rgba(62, 166, 255, 0.8);
+    transform: scale(1.05);
+}
+
+/* Reveal & Dissolve Animations */
+.project-lab-card.launching {
+    transform: scale(1.05);
+    border-color: #3ea6ff;
+    box-shadow: 0 0 40px rgba(62, 166, 255, 0.8);
+}
+
+.project-lab-card.dissolve-lab {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    pointer-events: none;
+}
+
+/* Projects Visibility */
+.lab-content-hidden {
+    display: none !important;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.8s ease;
+}
+
+.lab-content-visible {
+    display: grid !important;
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Close Button */
+.close-lab-btn {
+    padding: 8px 18px;
+    font-size: 13px;
+    color: #3ea6ff;
+    background: rgba(62, 166, 255, 0.1);
+    border: 1px solid #3ea6ff;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-lab-btn:hover {
+    background: #3ea6ff;
+    color: #000;
+    box-shadow: 0 0 15px rgba(62, 166, 255, 0.6);
+}
