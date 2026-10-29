@@ -17,6 +17,8 @@
         </button>
     </div>
 </div>
+<!-- Interactive Particles Background Canvas -->
+<canvas id="particles-canvas"></canvas>
 <header>
     <h1>Ihtisham.</h1>
     <nav>
@@ -332,6 +334,126 @@ function turnOffLight() {
 window.onload = function() {
     typeText();
 };
+</script>
+<script>
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+
+let particlesArray = [];
+let width = canvas.width = window.innerWidth;
+let height = canvas.height = window.innerHeight;
+
+// Mouse tracking position
+let mouse = {
+    x: null,
+    y: null,
+    radius: 150
+};
+
+window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+});
+
+window.addEventListener('mouseleave', () => {
+    mouse.x = null;
+    mouse.y = null;
+});
+
+window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    initParticles();
+});
+
+// Particle Class
+class Particle {
+    constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 2 + 1; // Node size
+        this.speedX = (Math.random() - 0.5) * 0.8;
+        this.speedY = (Math.random() - 0.5) * 0.8;
+        // Randomly assign Gold (#d4af37) or Cyan (#3ea6ff)
+        this.color = Math.random() > 0.5 ? '#d4af37' : '#3ea6ff';
+    }
+
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        // Bounce off screen boundaries
+        if (this.x < 0 || this.x > width) this.speedX *= -1;
+        if (this.y < 0 || this.y > height) this.speedY *= -1;
+
+        // Connect/Interact with Mouse Cursor
+        if (mouse.x && mouse.y) {
+            let dx = mouse.x - this.x;
+            let dy = mouse.y - this.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < mouse.radius) {
+                this.x -= dx * 0.02;
+                this.y -= dy * 0.02;
+            }
+        }
+    }
+
+    draw() {
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0; // Reset blur for performance
+    }
+}
+
+// Generate Particles
+function initParticles() {
+    particlesArray = [];
+    const numberOfParticles = Math.floor((width * height) / 12000);
+    for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+    }
+}
+
+// Connect nearby nodes with lines
+function connectLines() {
+    for (let a = 0; a < particlesArray.length; a++) {
+        for (let b = a + 1; b < particlesArray.length; b++) {
+            let dx = particlesArray[a].x - particlesArray[b].x;
+            let dy = particlesArray[a].y - particlesArray[b].y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 110) {
+                let opacity = 1 - (distance / 110);
+                ctx.strokeStyle = particlesArray[a].color === '#d4af37' 
+                    ? `rgba(212, 175, 55, ${opacity * 0.25})` 
+                    : `rgba(62, 166, 255, ${opacity * 0.25})`;
+                ctx.lineWidth = 0.8;
+                ctx.beginPath();
+                ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+// Animation Loop
+function animateParticles() {
+    ctx.clearRect(0, 0, width, height);
+    for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+    }
+    connectLines();
+    requestAnimationFrame(animateParticles);
+}
+
+initParticles();
+animateParticles();
 </script>
 </body>
 </html>

@@ -774,3 +774,13 @@ footer {
     box-shadow: 0 0 20px rgba(62, 166, 255, 0.7);
     transform: translateY(-2px);
 }
+/* Fullscreen Fixed Canvas for Particle Network */
+#particles-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0; /* Content ke piche chalega */
+    pointer-events: none; /* Mouse clicks buttons tak pounchne dega */
+}
